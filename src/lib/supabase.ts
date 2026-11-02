@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { ALL_BRANDS } from "./types";
 import type {
+  CompareDay, CompareItem, CompareLevel,
   AdAccount, BreakdownRow, DailyPoint, Level, Media, PeriodSummary, Profile, RawRow, SyncLog, View,
 } from "./types";
 
@@ -86,6 +87,24 @@ export const api = {
 
   async breakdown(s: Scope & { level: Level }): Promise<BreakdownRow[]> {
     return fetchAllRpc<BreakdownRow>("fn_breakdown", { ...scopeArgs(s), p_level: s.level });
+  },
+
+  // -------------------------------------------------------------------------
+  // 성과 비교
+  // -------------------------------------------------------------------------
+  /** 비교할 캠페인 · 세트 · 소재 검색 (최근 90일 광고비 큰 순, 최대 50개) */
+  async compareSearch(account: string, level: CompareLevel, query: string): Promise<CompareItem[]> {
+    return unwrap(await supabase.rpc("fn_compare_search", {
+      p_account: account, p_level: level, p_query: query,
+    }));
+  },
+
+  /** 항목 하나의 일별 성과 */
+  async compareDaily(account: string, item: CompareItem, from: string, to: string): Promise<CompareDay[]> {
+    return unwrap(await supabase.rpc("fn_compare_daily", {
+      p_account: account, p_media: item.media, p_from: from, p_to: to,
+      p_campaign: item.campaign_id, p_adgroup: item.adgroup_id, p_creative: item.creative_id,
+    }));
   },
 
   // -------------------------------------------------------------------------

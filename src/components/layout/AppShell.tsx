@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import {
-  BarChart3, Database, LayoutDashboard, LogOut, Menu, RefreshCw, Upload,
+  BarChart3, Database, GitCompare, LayoutDashboard, LogOut, Menu, RefreshCw, Upload,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useAuth } from "@/hooks/useAuth";
@@ -25,6 +25,7 @@ const NAV: { section: string; items: NavItem[] }[] = [
     section: "성과",
     items: [
       { to: "/", label: "대시보드", icon: LayoutDashboard },
+      { to: "/compare", label: "성과 비교", icon: GitCompare },
       { to: "/raw", label: "RAW 데이터", icon: Database },
     ],
   },

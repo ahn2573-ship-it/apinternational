@@ -139,3 +139,43 @@ export const LEVEL_LABEL: Record<Level, string> = {
   adgroup: "세트",
   creative: "소재·상품",
 };
+
+// ---------------------------------------------------------------------------
+// 성과 비교
+// ---------------------------------------------------------------------------
+/** 비교 단위 */
+export type CompareLevel = "campaign" | "adgroup" | "creative";
+
+export const COMPARE_LEVEL_LABEL: Record<CompareLevel, string> = {
+  campaign: "캠페인",
+  adgroup: "세트",
+  creative: "소재",
+};
+
+/** 비교할 수 있는 항목 하나 (검색 결과) */
+export interface CompareItem {
+  media: Media;
+  campaign_id: string;
+  adgroup_id: string | null;
+  creative_id: string | null;
+  name: string;
+  parent_name: string | null;
+  cost_90d: number;
+  last_date: string | null;
+}
+
+/** 항목의 하루 성과 (합계 · 비율은 화면에서 다시 계산) */
+export interface CompareDay {
+  stat_date: string;
+  impressions: number;
+  clicks: number;
+  cost: number;
+  conv_count: number;
+  conv_revenue: number;
+  total_conv_count: number;
+  total_conv_revenue: number;
+  cart_count: number;
+  cart_revenue: number;
+  rank_weight: number;
+  rank_impressions: number;
+}

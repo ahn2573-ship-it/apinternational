@@ -6,6 +6,7 @@ import { AppShell } from "@/components/layout/AppShell";
 import { Login } from "@/pages/Login";
 import { Dashboard } from "@/pages/Dashboard";
 import { RawData } from "@/pages/RawData";
+import { Compare } from "@/pages/Compare";
 import { GfaUpload } from "@/pages/GfaUpload";
 import { SyncLogs } from "@/pages/SyncLogs";
 import { EmptyState, Skeleton } from "@/components/ui";
@@ -49,6 +50,7 @@ function Shell() {
       <Routes>
         <Route element={<AppShell />}>
           <Route index element={<Dashboard />} />
+          <Route path="compare" element={<Compare />} />
           <Route path="raw" element={<RawData />} />
           <Route path="gfa" element={<AdminOnly><GfaUpload /></AdminOnly>} />
           <Route path="sync" element={<AdminOnly><SyncLogs /></AdminOnly>} />
